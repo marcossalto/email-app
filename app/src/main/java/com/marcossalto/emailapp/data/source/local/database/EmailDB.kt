@@ -11,5 +11,5 @@ import com.marcossalto.emailapp.domain.model.Email
     exportSchema = false
 )
 abstract class EmailDB: RoomDatabase() {
-    abstract val emailDao: EmailDao
+    abstract fun emailDao(): EmailDao
 }
