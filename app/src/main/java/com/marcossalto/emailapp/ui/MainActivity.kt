@@ -1,4 +1,4 @@
-package com.marcossalto.emailapp
+package com.marcossalto.emailapp.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -4,12 +4,13 @@ import com.marcossalto.emailapp.data.source.local.dao.EmailDao
 import com.marcossalto.emailapp.domain.model.Email
 import com.marcossalto.emailapp.domain.repository.EmailRepository
 import com.marcossalto.emailapp.domain.repository.Emails
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class EmailRepositoryImpl @Inject constructor(
     private val emailDao: EmailDao
 ) : EmailRepository {
-    override suspend fun getAllEmails(): Emails {
+    override fun getAllEmails(): Flow<Emails> {
         return emailDao.getAllEmails()
     }
 

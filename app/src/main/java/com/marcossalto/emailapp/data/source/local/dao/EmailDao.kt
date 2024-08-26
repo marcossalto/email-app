@@ -8,6 +8,7 @@ import androidx.room.Query
 import com.marcossalto.emailapp.core.Constants.Companion.EMAIL_TABLE
 import com.marcossalto.emailapp.domain.model.Email
 import com.marcossalto.emailapp.domain.repository.Emails
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EmailDao {
@@ -21,5 +22,5 @@ interface EmailDao {
     suspend fun getEmailById(id: Int): Email?
 
     @Query("SELECT * FROM $EMAIL_TABLE")
-    fun getAllEmails(): Emails
+    fun getAllEmails(): Flow<Emails>
 }
