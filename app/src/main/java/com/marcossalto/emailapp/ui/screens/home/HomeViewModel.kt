@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcossalto.emailapp.domain.model.HomeEvent
 import com.marcossalto.emailapp.domain.usecases.DeleteEmailUseCase
+import com.marcossalto.emailapp.domain.usecases.GetEmailUseCase
 import com.marcossalto.emailapp.domain.usecases.GetEmailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.onEach
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val deleteEmailUseCase: DeleteEmailUseCase,
-    getEmailsUseCase: GetEmailsUseCase
+    getEmailsUseCase: GetEmailsUseCase,
+    private val getEmailUseCase: GetEmailUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(HomeState())
     val state: State<HomeState> = _state
@@ -34,6 +36,11 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.OnDeleteEmail -> {
                 viewModelScope.launch {
                     deleteEmailUseCase(event.email)
+                }
+            }
+            is HomeEvent.OnViewEmail -> {
+                viewModelScope.launch {
+                    event.id?.let { getEmailUseCase(it) }
                 }
             }
         }
